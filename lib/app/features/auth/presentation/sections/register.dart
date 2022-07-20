@@ -1,6 +1,3 @@
-import 'dart:math';
-
-import 'package:conduit/app/features/auth/application/notifiers/auth_notifier.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,11 +6,16 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../constants/app_colors.dart';
 import '../../../../shared/widgets/app_button.dart';
 import '../../../../shared/widgets/auto_size_text.dart';
+import '../../application/notifiers/auth_notifier.dart';
 import '../../application/notifiers/page_notifier.dart';
 import '../widgets/label_text_field.dart';
 
 class RegisterSection extends StatelessWidget {
-  const RegisterSection({Key? key}) : super(key: key);
+  RegisterSection({Key? key}) : super(key: key);
+
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -48,37 +50,77 @@ class RegisterSection extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 18.0),
-          LabelTextField(
-            label: 'Your username',
-            controller: TextEditingController(),
+          Consumer(
+            builder: (context, ref, child) {
+              final state = ref.watch(AuthNotifier.provider);
+              return state.maybeWhen(
+                error: (email, password, username) => LabelTextField(
+                  label: 'Your username',
+                  error: username,
+                  controller: usernameController,
+                ),
+                orElse: () => LabelTextField(
+                  label: 'Your username',
+                  controller: usernameController,
+                ),
+              );
+            },
           ),
           const SizedBox(height: 18.0),
-          LabelTextField(
-            label: 'Your email',
-            controller: TextEditingController(),
+          Consumer(
+            builder: (context, ref, child) {
+              final state = ref.watch(AuthNotifier.provider);
+              return state.maybeWhen(
+                error: (email, password, username) => LabelTextField(
+                  label: 'Your email',
+                  error: email,
+                  controller: emailController,
+                ),
+                orElse: () => LabelTextField(
+                  label: 'Your email',
+                  controller: emailController,
+                ),
+              );
+            },
           ),
           const SizedBox(height: 18.0),
-          LabelTextField(
-            label: 'Your password',
-            controller: TextEditingController(),
+          Consumer(
+            builder: (context, ref, child) {
+              final state = ref.watch(AuthNotifier.provider);
+              return state.maybeWhen(
+                error: (email, password, username) => LabelTextField(
+                  label: 'Your password',
+                  error: password,
+                  controller: passwordController,
+                ),
+                orElse: () => LabelTextField(
+                  label: 'Your password',
+                  controller: passwordController,
+                ),
+              );
+            },
           ),
           const SizedBox(height: 36.0),
           Consumer(
             child: Consumer(
               builder: (context, ref, child) {
-                final notifier = ref.read(AuthController.provider.notifier);
+                final notifier = ref.read(AuthNotifier.provider.notifier);
                 return AppButton(
-                  label: '${Random().nextInt(1000)}',
+                  label: 'Create account',
                   onTap: () {
                     notifier(
-                      const AuthEvent.register('username', 'email', 'password'),
+                      AuthEvent.register(
+                        usernameController.text,
+                        emailController.text,
+                        passwordController.text,
+                      ),
                     );
                   },
                 );
               },
             ),
             builder: (context, ref, child) {
-              final state = ref.watch(AuthController.provider);
+              final state = ref.watch(AuthNotifier.provider);
               return state.maybeWhen(
                 loading: () => const AppButton(
                   loading: true,
@@ -93,7 +135,7 @@ class RegisterSection extends StatelessWidget {
           Consumer(
             builder: (context, ref, child) {
               final controllerNotifier =
-                  ref.watch(AuthPageController.provider.notifier);
+                  ref.read(AuthPageController.provider.notifier);
               return RichText(
                 text: TextSpan(
                   style: GoogleFonts.poppins(color: Colors.black),
@@ -106,9 +148,7 @@ class RegisterSection extends StatelessWidget {
                       style: const TextStyle(color: AppColors.secondary),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          // controllerNotifier.animate(1);
-                          ref.read(AuthController.provider.notifier)(
-                              const AuthEvent.login('email', 'password'));
+                          controllerNotifier.animate(1);
                         },
                     ),
                   ],

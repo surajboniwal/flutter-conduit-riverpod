@@ -20,7 +20,9 @@ mixin _$AuthState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String error) error,
+    required TResult Function(
+            String? emailError, String? passwordError, String? usernameError)
+        error,
     required TResult Function(String data) success,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +30,9 @@ mixin _$AuthState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String error)? error,
+    TResult Function(
+            String? emailError, String? passwordError, String? usernameError)?
+        error,
     TResult Function(String data)? success,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +40,9 @@ mixin _$AuthState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String error)? error,
+    TResult Function(
+            String? emailError, String? passwordError, String? usernameError)?
+        error,
     TResult Function(String data)? success,
     required TResult orElse(),
   }) =>
@@ -124,7 +130,9 @@ class _$_Initial implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String error) error,
+    required TResult Function(
+            String? emailError, String? passwordError, String? usernameError)
+        error,
     required TResult Function(String data) success,
   }) {
     return initial();
@@ -135,7 +143,9 @@ class _$_Initial implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String error)? error,
+    TResult Function(
+            String? emailError, String? passwordError, String? usernameError)?
+        error,
     TResult Function(String data)? success,
   }) {
     return initial?.call();
@@ -146,7 +156,9 @@ class _$_Initial implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String error)? error,
+    TResult Function(
+            String? emailError, String? passwordError, String? usernameError)?
+        error,
     TResult Function(String data)? success,
     required TResult orElse(),
   }) {
@@ -239,7 +251,9 @@ class _$_Loading implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String error) error,
+    required TResult Function(
+            String? emailError, String? passwordError, String? usernameError)
+        error,
     required TResult Function(String data) success,
   }) {
     return loading();
@@ -250,7 +264,9 @@ class _$_Loading implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String error)? error,
+    TResult Function(
+            String? emailError, String? passwordError, String? usernameError)?
+        error,
     TResult Function(String data)? success,
   }) {
     return loading?.call();
@@ -261,7 +277,9 @@ class _$_Loading implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String error)? error,
+    TResult Function(
+            String? emailError, String? passwordError, String? usernameError)?
+        error,
     TResult Function(String data)? success,
     required TResult orElse(),
   }) {
@@ -317,7 +335,7 @@ abstract class _Loading implements AuthState {
 abstract class _$$_ErrorCopyWith<$Res> {
   factory _$$_ErrorCopyWith(_$_Error value, $Res Function(_$_Error) then) =
       __$$_ErrorCopyWithImpl<$Res>;
-  $Res call({String error});
+  $Res call({String? emailError, String? passwordError, String? usernameError});
 }
 
 /// @nodoc
@@ -331,13 +349,23 @@ class __$$_ErrorCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? error = freezed,
+    Object? emailError = freezed,
+    Object? passwordError = freezed,
+    Object? usernameError = freezed,
   }) {
     return _then(_$_Error(
-      error == freezed
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as String,
+      emailError: emailError == freezed
+          ? _value.emailError
+          : emailError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      passwordError: passwordError == freezed
+          ? _value.passwordError
+          : passwordError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      usernameError: usernameError == freezed
+          ? _value.usernameError
+          : usernameError // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -345,14 +373,18 @@ class __$$_ErrorCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Error implements _Error {
-  const _$_Error(this.error);
+  const _$_Error({this.emailError, this.passwordError, this.usernameError});
 
   @override
-  final String error;
+  final String? emailError;
+  @override
+  final String? passwordError;
+  @override
+  final String? usernameError;
 
   @override
   String toString() {
-    return 'AuthState.error(error: $error)';
+    return 'AuthState.error(emailError: $emailError, passwordError: $passwordError, usernameError: $usernameError)';
   }
 
   @override
@@ -360,12 +392,20 @@ class _$_Error implements _Error {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Error &&
-            const DeepCollectionEquality().equals(other.error, error));
+            const DeepCollectionEquality()
+                .equals(other.emailError, emailError) &&
+            const DeepCollectionEquality()
+                .equals(other.passwordError, passwordError) &&
+            const DeepCollectionEquality()
+                .equals(other.usernameError, usernameError));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(error));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(emailError),
+      const DeepCollectionEquality().hash(passwordError),
+      const DeepCollectionEquality().hash(usernameError));
 
   @JsonKey(ignore: true)
   @override
@@ -377,10 +417,12 @@ class _$_Error implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String error) error,
+    required TResult Function(
+            String? emailError, String? passwordError, String? usernameError)
+        error,
     required TResult Function(String data) success,
   }) {
-    return error(this.error);
+    return error(emailError, passwordError, usernameError);
   }
 
   @override
@@ -388,10 +430,12 @@ class _$_Error implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String error)? error,
+    TResult Function(
+            String? emailError, String? passwordError, String? usernameError)?
+        error,
     TResult Function(String data)? success,
   }) {
-    return error?.call(this.error);
+    return error?.call(emailError, passwordError, usernameError);
   }
 
   @override
@@ -399,12 +443,14 @@ class _$_Error implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String error)? error,
+    TResult Function(
+            String? emailError, String? passwordError, String? usernameError)?
+        error,
     TResult Function(String data)? success,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(this.error);
+      return error(emailError, passwordError, usernameError);
     }
     return orElse();
   }
@@ -448,9 +494,14 @@ class _$_Error implements _Error {
 }
 
 abstract class _Error implements AuthState {
-  const factory _Error(final String error) = _$_Error;
+  const factory _Error(
+      {final String? emailError,
+      final String? passwordError,
+      final String? usernameError}) = _$_Error;
 
-  String get error;
+  String? get emailError;
+  String? get passwordError;
+  String? get usernameError;
   @JsonKey(ignore: true)
   _$$_ErrorCopyWith<_$_Error> get copyWith =>
       throw _privateConstructorUsedError;
@@ -521,7 +572,9 @@ class _$_Success implements _Success {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String error) error,
+    required TResult Function(
+            String? emailError, String? passwordError, String? usernameError)
+        error,
     required TResult Function(String data) success,
   }) {
     return success(data);
@@ -532,7 +585,9 @@ class _$_Success implements _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String error)? error,
+    TResult Function(
+            String? emailError, String? passwordError, String? usernameError)?
+        error,
     TResult Function(String data)? success,
   }) {
     return success?.call(data);
@@ -543,7 +598,9 @@ class _$_Success implements _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String error)? error,
+    TResult Function(
+            String? emailError, String? passwordError, String? usernameError)?
+        error,
     TResult Function(String data)? success,
     required TResult orElse(),
   }) {

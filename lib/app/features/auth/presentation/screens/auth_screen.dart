@@ -24,9 +24,9 @@ class AuthScreen extends StatelessWidget {
               return PageView(
                 controller: controller,
                 physics: const NeverScrollableScrollPhysics(),
-                children: const [
+                children: [
                   RegisterSection(),
-                  LoginSection(),
+                  const LoginSection(),
                 ],
               );
             },
