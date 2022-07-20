@@ -14,23 +14,18 @@ class AuthScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: GestureDetector(
-          onTap: () {
-            FocusScope.of(context).unfocus();
+        child: Consumer(
+          builder: (context, ref, child) {
+            final controller = ref.read(AuthPageController.provider);
+            return PageView(
+              controller: controller,
+              physics: const NeverScrollableScrollPhysics(),
+              children: [
+                RegisterSection(),
+                const LoginSection(),
+              ],
+            );
           },
-          child: Consumer(
-            builder: (context, ref, child) {
-              final controller = ref.read(AuthPageController.provider);
-              return PageView(
-                controller: controller,
-                physics: const NeverScrollableScrollPhysics(),
-                children: [
-                  RegisterSection(),
-                  const LoginSection(),
-                ],
-              );
-            },
-          ),
         ),
       ),
     );

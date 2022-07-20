@@ -1,3 +1,4 @@
+import 'package:conduit/app/features/auth/application/states/auth_state.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,15 +11,34 @@ import '../../application/notifiers/auth_notifier.dart';
 import '../../application/notifiers/page_notifier.dart';
 import '../widgets/label_text_field.dart';
 
-class RegisterSection extends StatelessWidget {
+class RegisterSection extends ConsumerWidget {
   RegisterSection({Key? key}) : super(key: key);
 
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  void clean() {
+    usernameController.text = '';
+    emailController.text = '';
+    passwordController.text = '';
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen<AuthState>(
+      AuthNotifier.provider,
+      (previous, next) {
+        next.whenOrNull(
+          success: (data) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Account created successfully')),
+            );
+            clean();
+          },
+        );
+      },
+    );
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 32.0),
       child: Column(
@@ -149,6 +169,7 @@ class RegisterSection extends StatelessWidget {
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
                           controllerNotifier.animate(1);
+                          clean();
                         },
                     ),
                   ],

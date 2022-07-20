@@ -6,8 +6,7 @@ class LabelTextField extends StatelessWidget {
     required this.label,
     required this.controller,
     this.error,
-  })  : assert(error == null ? controller != null : true),
-        super(key: key);
+  }) : super(key: key);
 
   final String label;
   final TextEditingController controller;
