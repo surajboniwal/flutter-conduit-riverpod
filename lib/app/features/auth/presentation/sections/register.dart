@@ -122,31 +122,26 @@ class RegisterSection extends ConsumerWidget {
           ),
           const SizedBox(height: 36.0),
           Consumer(
-            child: Consumer(
-              builder: (context, ref, child) {
-                final notifier = ref.read(AuthNotifier.provider.notifier);
-                return AppButton(
-                  label: 'Create account',
-                  onTap: () {
-                    notifier(
-                      AuthEvent.register(
-                        usernameController.text,
-                        emailController.text,
-                        passwordController.text,
-                      ),
-                    );
-                  },
-                );
-              },
-            ),
             builder: (context, ref, child) {
               final state = ref.watch(AuthNotifier.provider);
+              final notifier = ref.read(AuthNotifier.provider.notifier);
               return state.maybeWhen(
                 loading: () => const AppButton(
                   loading: true,
                 ),
                 orElse: () {
-                  return child!;
+                  return AppButton(
+                    label: 'Create account',
+                    onTap: () {
+                      notifier(
+                        AuthEvent.register(
+                          usernameController.text,
+                          emailController.text,
+                          passwordController.text,
+                        ),
+                      );
+                    },
+                  );
                 },
               );
             },
@@ -156,6 +151,7 @@ class RegisterSection extends ConsumerWidget {
             builder: (context, ref, child) {
               final controllerNotifier =
                   ref.read(AuthPageController.provider.notifier);
+              final authController = ref.read(AuthNotifier.provider.notifier);
               return RichText(
                 text: TextSpan(
                   style: GoogleFonts.poppins(color: Colors.black),
@@ -169,6 +165,7 @@ class RegisterSection extends ConsumerWidget {
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
                           controllerNotifier.animate(1);
+                          authController(const AuthEvent.initial());
                           clean();
                         },
                     ),

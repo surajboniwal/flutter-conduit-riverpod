@@ -1,3 +1,4 @@
+import 'package:conduit/app/features/auth/application/notifiers/auth_notifier.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,7 +11,10 @@ import '../../application/notifiers/page_notifier.dart';
 import '../widgets/label_text_field.dart';
 
 class LoginSection extends StatelessWidget {
-  const LoginSection({Key? key}) : super(key: key);
+  LoginSection({Key? key}) : super(key: key);
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -45,19 +49,59 @@ class LoginSection extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 18.0),
-          LabelTextField(
-            label: 'Your email',
-            controller: TextEditingController(),
+          Consumer(
+            builder: (context, ref, child) {
+              final state = ref.watch(AuthNotifier.provider);
+              return state.maybeWhen(
+                error: (email, password, username) => LabelTextField(
+                  label: 'Your email',
+                  error: email,
+                  controller: emailController,
+                ),
+                orElse: () => LabelTextField(
+                  label: 'Your email',
+                  controller: emailController,
+                ),
+              );
+            },
           ),
           const SizedBox(height: 18.0),
-          LabelTextField(
-            label: 'Your password',
-            controller: TextEditingController(),
+          Consumer(
+            builder: (context, ref, child) {
+              final state = ref.watch(AuthNotifier.provider);
+              return state.maybeWhen(
+                error: (email, password, username) => LabelTextField(
+                  label: 'Your password',
+                  error: password,
+                  controller: passwordController,
+                ),
+                orElse: () => LabelTextField(
+                  label: 'Your password',
+                  controller: passwordController,
+                ),
+              );
+            },
           ),
           const SizedBox(height: 36.0),
-          AppButton(
-            label: 'Login',
-            onTap: () {},
+          Consumer(
+            builder: (context, ref, child) {
+              final state = ref.watch(AuthNotifier.provider);
+              final notifier = ref.watch(AuthNotifier.provider.notifier);
+              return state.maybeWhen(
+                loading: () => const AppButton(
+                  loading: true,
+                ),
+                orElse: () => AppButton(
+                  label: 'Login',
+                  onTap: () {
+                    notifier(
+                      AuthEvent.login(
+                          emailController.text, passwordController.text),
+                    );
+                  },
+                ),
+              );
+            },
           ),
           const SizedBox(height: 12.0),
           Consumer(

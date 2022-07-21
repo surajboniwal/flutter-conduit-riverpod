@@ -28,10 +28,34 @@ class AuthNotifier extends StateNotifier<AuthState> {
     event.when(
       login: _login,
       register: _register,
+      initial: _initial,
     );
   }
 
-  void _login(email, password) {
+  void _initial() {
+    state = const AuthState.initial();
+  }
+
+  Future<void> _login(email, password) async {
+    state = const AuthState.loading();
+
+    final loginResponse = await authRepository.login({
+      'user': {
+        'email': email,
+        'password': password,
+      },
+    });
+
+    if (loginResponse.status.isError()) {
+      state = AuthState.error(
+        emailError: loginResponse.message["email"]?[0],
+        passwordError: loginResponse.message["password"]?[0] ??
+            loginResponse.message["email or password"]?[0],
+      );
+      return;
+    }
+
+    print(loginResponse.data);
     state = AuthState.success(email);
   }
 

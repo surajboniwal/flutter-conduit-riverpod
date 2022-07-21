@@ -13,7 +13,7 @@ class NetworkManager {
   factory NetworkManager() {
     final dio = Dio(
       BaseOptions(
-        baseUrl: 'https://api.realworld.io',
+        baseUrl: 'https://api.realworld.io/api',
       ),
     );
     return NetworkManager._(dio);

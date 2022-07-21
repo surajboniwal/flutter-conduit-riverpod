@@ -16,7 +16,22 @@ class AuthRepository {
       Map<String, dynamic> data) async {
     final response = await networkManager.request(
       RequestMethod.post,
-      '/api/users',
+      '/users',
+      data: data,
+    );
+
+    if (response.status.isError()) {
+      return ApiResponse.error(response.message.response?.data['errors'] ?? {});
+    }
+
+    return ApiResponse.completed(response.data.data);
+  }
+
+  Future<ApiResponse<Map<String, dynamic>, Map<String, dynamic>>> login(
+      Map<String, dynamic> data) async {
+    final response = await networkManager.request(
+      RequestMethod.post,
+      '/users/login',
       data: data,
     );
 

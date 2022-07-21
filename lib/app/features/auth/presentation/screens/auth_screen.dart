@@ -22,7 +22,7 @@ class AuthScreen extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               children: [
                 RegisterSection(),
-                const LoginSection(),
+                LoginSection(),
               ],
             );
           },
