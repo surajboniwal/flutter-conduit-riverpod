@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../features/auth/data/models/user.dart';
+import '../../../features/home/data/models/user.dart';
 
 part 'user_event.freezed.dart';
 

@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'local_storage.dart';
+
 export 'package:dio/dio.dart';
 
 class NetworkManager {
@@ -14,9 +16,18 @@ class NetworkManager {
     final dio = Dio(
       BaseOptions(
         baseUrl: 'https://api.realworld.io/api',
+        headers: {
+          'Authorization': 'Token ${Storage.config.get(StorageKey.token)}',
+        },
       ),
     );
     return NetworkManager._(dio);
+  }
+
+  void refreshToken() {
+    dio.options.headers = {
+      'Authorization': 'Token ${Storage.config.get(StorageKey.token)}',
+    };
   }
 
   Future<ApiResponse<Response, DioError>> request(

@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/local_storage.dart';
+import '../../../../core/network_manager.dart';
 import '../../data/repository/auth_repository.dart';
 import '../events/auth_event.dart';
 import '../states/auth_state.dart';
@@ -9,10 +10,12 @@ export '../events/auth_event.dart';
 
 class AuthNotifier extends StateNotifier<AuthState> {
   final AuthRepository authRepository;
+  final Reader read;
 
   AuthNotifier(
     super.state, {
     required this.authRepository,
+    required this.read,
   });
 
   static final provider =
@@ -22,6 +25,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
       return AuthNotifier(
         const AuthState.initial(),
         authRepository: authRepository,
+        read: ref.read,
       );
     },
   );
@@ -58,7 +62,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     }
 
     Storage.config.add(StorageKey.token, loginResponse.data['user']['token']);
-
+    read(NetworkManager.provider).refreshToken();
     state = AuthState.success(email);
   }
 
@@ -83,7 +87,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
     Storage.config
         .add(StorageKey.token, registerResponse.data['user']['token']);
-
+    read(NetworkManager.provider).refreshToken();
     state = AuthState.success(username);
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../features/auth/data/models/user.dart';
+import '../../../features/home/data/models/user.dart';
 import '../events/user_event.dart';
 import '../states/user_state.dart';
 

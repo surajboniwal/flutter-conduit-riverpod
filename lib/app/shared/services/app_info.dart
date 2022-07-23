@@ -1,5 +1,6 @@
-import 'package:conduit/app/core/network_manager.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../core/network_manager.dart';
 
 class AppInfo extends StateNotifier<Map<String, dynamic>> {
   AppInfo(super.state, this.networkManager);

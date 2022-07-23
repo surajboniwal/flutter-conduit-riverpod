@@ -1,4 +1,3 @@
-import 'package:conduit/app/shared/services/app_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,6 +7,7 @@ import 'app/core/local_storage.dart';
 import 'app/core/route_manager.dart';
 import 'app/features/auth/presentation/screens/auth_screen.dart';
 import 'app/features/home/presentation/screens/home_screen.dart';
+import 'app/shared/services/app_info.dart';
 
 String initialRoute = AuthScreen.route;
 Future<void> main() async {
