@@ -81,6 +81,7 @@ class HomeScreen extends StatelessWidget {
                     Text(article.description),
                     const SizedBox(height: 6.0),
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
                           DateFormat('MMM dd, yyyy').format(article.createdAt),
@@ -94,6 +95,14 @@ class HomeScreen extends StatelessWidget {
                           FeatherIcons.bookmark,
                           size: 18.0,
                           color: Colors.grey,
+                        ),
+                        const SizedBox(width: 8.0),
+                        Text(
+                          '${article.favoritesCount}',
+                          style: const TextStyle(
+                            fontSize: 12.0,
+                            color: Colors.grey,
+                          ),
                         ),
                       ],
                     ),
