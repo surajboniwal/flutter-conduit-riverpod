@@ -1,3 +1,4 @@
+import 'package:conduit/app/shared/services/app_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,16 +11,14 @@ import 'app/features/home/presentation/screens/home_screen.dart';
 
 String initialRoute = AuthScreen.route;
 Future<void> main() async {
-  await Hive.initFlutter();
-  await Future.forEach(Storage.values, (Storage val) async {
-    await val.openBox();
-  });
-
-  if (Storage.config.get(StorageKey.token) != null) {
-    initialRoute = HomeScreen.route;
-  }
-
-  runApp(const ProviderScope(child: ConduitApp()));
+  final container = ProviderContainer();
+  await init(container);
+  runApp(
+    UncontrolledProviderScope(
+      container: container,
+      child: const ConduitApp(),
+    ),
+  );
 }
 
 class ConduitApp extends StatelessWidget {
@@ -37,5 +36,18 @@ class ConduitApp extends StatelessWidget {
       onGenerateRoute: RouteManager.onGenerateRoute,
       debugShowCheckedModeBanner: false,
     );
+  }
+}
+
+Future<void> init(ProviderContainer container) async {
+  await Hive.initFlutter();
+  await Future.forEach(Storage.values, (Storage val) async {
+    await val.openBox();
+  });
+
+  await container.read(AppInfo.provider.notifier).init();
+
+  if (Storage.config.get(StorageKey.token) != null) {
+    initialRoute = HomeScreen.route;
   }
 }

@@ -15,7 +15,8 @@ class AuthNotifier extends StateNotifier<AuthState> {
     required this.authRepository,
   });
 
-  static final provider = StateNotifierProvider<AuthNotifier, AuthState>(
+  static final provider =
+      StateNotifierProvider.autoDispose<AuthNotifier, AuthState>(
     (ref) {
       final authRepository = ref.read(AuthRepository.provider);
       return AuthNotifier(
