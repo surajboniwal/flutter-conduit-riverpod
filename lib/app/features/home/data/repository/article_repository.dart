@@ -6,10 +6,16 @@ class ArticleRepository {
 
   ArticleRepository(this.networkManager);
 
-  Future<ApiResponse<List<Article>, Map<String, dynamic>>>
-      fetchArticles() async {
-    final response =
-        await networkManager.request(RequestMethod.get, '/articles');
+  Future<ApiResponse<List<Article>, Map<String, dynamic>>> fetchArticles(
+      String tag) async {
+    final response = await networkManager.request(
+      RequestMethod.get,
+      '/articles${tag == 'Following' ? '/feed' : ''}',
+      queryParameters: {
+        if (tag.toLowerCase() != 'all' && tag.toLowerCase() != 'following')
+          'tag': tag,
+      },
+    );
 
     if (response.status.isError()) {
       return ApiResponse.error(response.message.response?.data ?? {});

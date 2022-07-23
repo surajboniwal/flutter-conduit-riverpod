@@ -9,4 +9,5 @@ class ArticleState with _$ArticleState {
   factory ArticleState.loading() = _Loading;
   factory ArticleState.error(String error) = _Error;
   factory ArticleState.data(List<Article> data) = _Data;
+  factory ArticleState.empty(String tag) = _Empty;
 }

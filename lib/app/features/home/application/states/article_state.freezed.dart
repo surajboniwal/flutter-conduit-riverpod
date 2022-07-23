@@ -21,6 +21,7 @@ mixin _$ArticleState {
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function(List<Article> data) data,
+    required TResult Function(String tag) empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$ArticleState {
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(List<Article> data)? data,
+    TResult Function(String tag)? empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$ArticleState {
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(List<Article> data)? data,
+    TResult Function(String tag)? empty,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,7 @@ mixin _$ArticleState {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_Data value) data,
+    required TResult Function(_Empty value) empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +54,7 @@ mixin _$ArticleState {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_Data value)? data,
+    TResult Function(_Empty value)? empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +62,7 @@ mixin _$ArticleState {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_Data value)? data,
+    TResult Function(_Empty value)? empty,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -120,6 +126,7 @@ class _$_Loading implements _Loading {
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function(List<Article> data) data,
+    required TResult Function(String tag) empty,
   }) {
     return loading();
   }
@@ -130,6 +137,7 @@ class _$_Loading implements _Loading {
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(List<Article> data)? data,
+    TResult Function(String tag)? empty,
   }) {
     return loading?.call();
   }
@@ -140,6 +148,7 @@ class _$_Loading implements _Loading {
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(List<Article> data)? data,
+    TResult Function(String tag)? empty,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -154,6 +163,7 @@ class _$_Loading implements _Loading {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_Data value) data,
+    required TResult Function(_Empty value) empty,
   }) {
     return loading(this);
   }
@@ -164,6 +174,7 @@ class _$_Loading implements _Loading {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_Data value)? data,
+    TResult Function(_Empty value)? empty,
   }) {
     return loading?.call(this);
   }
@@ -174,6 +185,7 @@ class _$_Loading implements _Loading {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_Data value)? data,
+    TResult Function(_Empty value)? empty,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -252,6 +264,7 @@ class _$_Error implements _Error {
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function(List<Article> data) data,
+    required TResult Function(String tag) empty,
   }) {
     return error(this.error);
   }
@@ -262,6 +275,7 @@ class _$_Error implements _Error {
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(List<Article> data)? data,
+    TResult Function(String tag)? empty,
   }) {
     return error?.call(this.error);
   }
@@ -272,6 +286,7 @@ class _$_Error implements _Error {
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(List<Article> data)? data,
+    TResult Function(String tag)? empty,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -286,6 +301,7 @@ class _$_Error implements _Error {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_Data value) data,
+    required TResult Function(_Empty value) empty,
   }) {
     return error(this);
   }
@@ -296,6 +312,7 @@ class _$_Error implements _Error {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_Data value)? data,
+    TResult Function(_Empty value)? empty,
   }) {
     return error?.call(this);
   }
@@ -306,6 +323,7 @@ class _$_Error implements _Error {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_Data value)? data,
+    TResult Function(_Empty value)? empty,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -393,6 +411,7 @@ class _$_Data implements _Data {
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function(List<Article> data) data,
+    required TResult Function(String tag) empty,
   }) {
     return data(this.data);
   }
@@ -403,6 +422,7 @@ class _$_Data implements _Data {
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(List<Article> data)? data,
+    TResult Function(String tag)? empty,
   }) {
     return data?.call(this.data);
   }
@@ -413,6 +433,7 @@ class _$_Data implements _Data {
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(List<Article> data)? data,
+    TResult Function(String tag)? empty,
     required TResult orElse(),
   }) {
     if (data != null) {
@@ -427,6 +448,7 @@ class _$_Data implements _Data {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_Data value) data,
+    required TResult Function(_Empty value) empty,
   }) {
     return data(this);
   }
@@ -437,6 +459,7 @@ class _$_Data implements _Data {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_Data value)? data,
+    TResult Function(_Empty value)? empty,
   }) {
     return data?.call(this);
   }
@@ -447,6 +470,7 @@ class _$_Data implements _Data {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_Data value)? data,
+    TResult Function(_Empty value)? empty,
     required TResult orElse(),
   }) {
     if (data != null) {
@@ -462,4 +486,147 @@ abstract class _Data implements ArticleState {
   List<Article> get data;
   @JsonKey(ignore: true)
   _$$_DataCopyWith<_$_Data> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_EmptyCopyWith<$Res> {
+  factory _$$_EmptyCopyWith(_$_Empty value, $Res Function(_$_Empty) then) =
+      __$$_EmptyCopyWithImpl<$Res>;
+  $Res call({String tag});
+}
+
+/// @nodoc
+class __$$_EmptyCopyWithImpl<$Res> extends _$ArticleStateCopyWithImpl<$Res>
+    implements _$$_EmptyCopyWith<$Res> {
+  __$$_EmptyCopyWithImpl(_$_Empty _value, $Res Function(_$_Empty) _then)
+      : super(_value, (v) => _then(v as _$_Empty));
+
+  @override
+  _$_Empty get _value => super._value as _$_Empty;
+
+  @override
+  $Res call({
+    Object? tag = freezed,
+  }) {
+    return _then(_$_Empty(
+      tag == freezed
+          ? _value.tag
+          : tag // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_Empty implements _Empty {
+  _$_Empty(this.tag);
+
+  @override
+  final String tag;
+
+  @override
+  String toString() {
+    return 'ArticleState.empty(tag: $tag)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Empty &&
+            const DeepCollectionEquality().equals(other.tag, tag));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(tag));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_EmptyCopyWith<_$_Empty> get copyWith =>
+      __$$_EmptyCopyWithImpl<_$_Empty>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loading,
+    required TResult Function(String error) error,
+    required TResult Function(List<Article> data) data,
+    required TResult Function(String tag) empty,
+  }) {
+    return empty(tag);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function(String error)? error,
+    TResult Function(List<Article> data)? data,
+    TResult Function(String tag)? empty,
+  }) {
+    return empty?.call(tag);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function(String error)? error,
+    TResult Function(List<Article> data)? data,
+    TResult Function(String tag)? empty,
+    required TResult orElse(),
+  }) {
+    if (empty != null) {
+      return empty(tag);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Error value) error,
+    required TResult Function(_Data value) data,
+    required TResult Function(_Empty value) empty,
+  }) {
+    return empty(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Error value)? error,
+    TResult Function(_Data value)? data,
+    TResult Function(_Empty value)? empty,
+  }) {
+    return empty?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Error value)? error,
+    TResult Function(_Data value)? data,
+    TResult Function(_Empty value)? empty,
+    required TResult orElse(),
+  }) {
+    if (empty != null) {
+      return empty(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Empty implements ArticleState {
+  factory _Empty(final String tag) = _$_Empty;
+
+  String get tag;
+  @JsonKey(ignore: true)
+  _$$_EmptyCopyWith<_$_Empty> get copyWith =>
+      throw _privateConstructorUsedError;
 }

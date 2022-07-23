@@ -3,7 +3,7 @@ import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
-import '../../application/article_notifier.dart';
+import '../../application/notifiers/article_notifier.dart';
 import '../widgets/home_appbar.dart';
 import '../widgets/home_shimmer_loading.dart';
 
@@ -42,6 +42,8 @@ class HomeScreen extends StatelessWidget {
           return state.when(
             loading: () => const HomeShimmerLoading(),
             error: (error) => Center(child: Text(error)),
+            empty: (tag) =>
+                Center(child: Text('No data found for ${tag.toLowerCase()}')),
             data: (articles) => ListView.separated(
               padding: const EdgeInsets.all(16.0),
               itemCount: articles.length,
