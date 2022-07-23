@@ -14,7 +14,7 @@ class HomeShimmerLoading extends StatelessWidget {
       child: ListView.separated(
         padding: const EdgeInsets.all(16.0),
         itemCount: 10,
-        separatorBuilder: (context, index) => const SizedBox(height: 32.0),
+        separatorBuilder: (context, index) => const Divider(height: 36.0),
         itemBuilder: (context, index) => const HomeShimmerLoadingItem(),
       ),
     );
@@ -66,12 +66,12 @@ class HomeShimmerLoadingItem extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(width: 16.0),
-        const ShimmerContainer(
-          height: 70,
-          width: 100,
-          borderRadius: 4,
-        ),
+        // const SizedBox(width: 16.0),
+        // const ShimmerContainer(
+        //   height: 70,
+        //   width: 100,
+        //   borderRadius: 4,
+        // ),
       ],
     );
   }
