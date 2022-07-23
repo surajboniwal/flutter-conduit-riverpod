@@ -8,7 +8,7 @@ import '../sections/register.dart';
 class AuthScreen extends StatelessWidget {
   const AuthScreen({Key? key}) : super(key: key);
 
-  static const String route = '/';
+  static const String route = 'auth';
 
   @override
   Widget build(BuildContext context) {

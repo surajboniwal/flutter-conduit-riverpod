@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../features/auth/presentation/screens/auth_screen.dart';
+import '../features/home/presentation/screens/home_screen.dart';
 
 class RouteManager {
   static String? currentRoute;
@@ -11,6 +12,9 @@ class RouteManager {
     switch (settings.name) {
       case AuthScreen.route:
         child = const AuthScreen();
+        break;
+      case HomeScreen.route:
+        child = const HomeScreen();
         break;
     }
 

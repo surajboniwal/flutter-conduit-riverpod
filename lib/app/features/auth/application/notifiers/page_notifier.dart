@@ -11,8 +11,8 @@ class AuthPageController extends StateNotifier<PageController> {
     ),
   );
 
-  void animate(int page) {
-    state.animateToPage(page,
+  Future<void> animate(int page) async {
+    await state.animateToPage(page,
         duration: const Duration(milliseconds: 200), curve: Curves.easeOutExpo);
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/local_storage.dart';
 import '../../data/repository/auth_repository.dart';
 import '../events/auth_event.dart';
 import '../states/auth_state.dart';
@@ -55,7 +56,8 @@ class AuthNotifier extends StateNotifier<AuthState> {
       return;
     }
 
-    print(loginResponse.data);
+    Storage.config.add(StorageKey.token, loginResponse.data['user']['token']);
+
     state = AuthState.success(email);
   }
 
@@ -70,7 +72,6 @@ class AuthNotifier extends StateNotifier<AuthState> {
     });
 
     if (registerResponse.status.isError()) {
-      print(registerResponse.message);
       state = AuthState.error(
         emailError: registerResponse.message["email"]?[0],
         passwordError: registerResponse.message["password"]?[0],
@@ -79,7 +80,9 @@ class AuthNotifier extends StateNotifier<AuthState> {
       return;
     }
 
-    print(registerResponse.data);
+    Storage.config
+        .add(StorageKey.token, registerResponse.data['user']['token']);
+
     state = AuthState.success(username);
   }
 }

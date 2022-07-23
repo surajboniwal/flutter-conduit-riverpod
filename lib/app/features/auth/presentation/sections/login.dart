@@ -1,23 +1,44 @@
-import 'package:conduit/app/features/auth/application/notifiers/auth_notifier.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../constants/app_colors.dart';
-import '../../../../shared/widgets/app_button.dart';
-import '../../../../shared/widgets/auto_size_text.dart';
+import '../../../../shared/presentation/widgets/app_button.dart';
+import '../../../../shared/presentation/widgets/auto_size_text.dart';
+import '../../../home/presentation/screens/home_screen.dart';
+import '../../application/notifiers/auth_notifier.dart';
 import '../../application/notifiers/page_notifier.dart';
+import '../../application/states/auth_state.dart';
 import '../widgets/label_text_field.dart';
 
-class LoginSection extends StatelessWidget {
+class LoginSection extends ConsumerWidget {
   LoginSection({Key? key}) : super(key: key);
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  void clean() {
+    emailController.text = '';
+    passwordController.text = '';
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen<AuthState>(
+      AuthNotifier.provider,
+      (previous, next) {
+        next.whenOrNull(
+          success: (data) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Login successfully')),
+            );
+            Navigator.of(context).pushReplacementNamed(HomeScreen.route);
+            clean();
+          },
+        );
+      },
+    );
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 32.0),
       child: Column(
@@ -108,6 +129,7 @@ class LoginSection extends StatelessWidget {
             builder: (context, ref, child) {
               final controllerNotifier =
                   ref.read(AuthPageController.provider.notifier);
+              final authController = ref.read(AuthNotifier.provider.notifier);
               return RichText(
                 text: TextSpan(
                   style: GoogleFonts.poppins(color: Colors.black),
@@ -119,8 +141,10 @@ class LoginSection extends StatelessWidget {
                       text: 'Register',
                       style: const TextStyle(color: AppColors.secondary),
                       recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          controllerNotifier.animate(0);
+                        ..onTap = () async {
+                          await controllerNotifier.animate(0);
+                          authController(const AuthEvent.initial());
+                          clean();
                         },
                     ),
                   ],

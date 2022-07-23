@@ -1,14 +1,15 @@
-import 'package:conduit/app/features/auth/application/states/auth_state.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../constants/app_colors.dart';
-import '../../../../shared/widgets/app_button.dart';
-import '../../../../shared/widgets/auto_size_text.dart';
+import '../../../../shared/presentation/widgets/app_button.dart';
+import '../../../../shared/presentation/widgets/auto_size_text.dart';
+import '../../../home/presentation/screens/home_screen.dart';
 import '../../application/notifiers/auth_notifier.dart';
 import '../../application/notifiers/page_notifier.dart';
+import '../../application/states/auth_state.dart';
 import '../widgets/label_text_field.dart';
 
 class RegisterSection extends ConsumerWidget {
@@ -34,6 +35,7 @@ class RegisterSection extends ConsumerWidget {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Account created successfully')),
             );
+            Navigator.of(context).pushReplacementNamed(HomeScreen.route);
             clean();
           },
         );
@@ -163,8 +165,8 @@ class RegisterSection extends ConsumerWidget {
                       text: 'Sign in',
                       style: const TextStyle(color: AppColors.secondary),
                       recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          controllerNotifier.animate(1);
+                        ..onTap = () async {
+                          await controllerNotifier.animate(1);
                           authController(const AuthEvent.initial());
                           clean();
                         },
