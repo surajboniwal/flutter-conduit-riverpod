@@ -1,8 +1,8 @@
-import 'package:conduit/app/features/home/application/notifiers/tags_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../shared/presentation/extensions/string.dart';
+import '../../application/notifiers/tags_notifier.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomeAppBar({Key? key}) : super(key: key);

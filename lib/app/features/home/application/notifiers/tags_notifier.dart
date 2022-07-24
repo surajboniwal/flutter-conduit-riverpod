@@ -1,5 +1,6 @@
-import 'package:conduit/app/shared/services/app_info.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../../shared/services/app_info.dart';
 
 class TagNotifier extends StateNotifier<String> {
   TagNotifier(super.state, this.read);

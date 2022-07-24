@@ -5,16 +5,16 @@ import 'package:flutter/foundation.dart';
 import 'author.dart';
 
 class Article {
-  String slug;
-  String title;
-  String description;
-  String body;
-  List<String> tagList;
-  DateTime createdAt;
-  DateTime updatedAt;
-  bool favorited;
-  int favoritesCount;
-  Author author;
+  final String slug;
+  final String title;
+  final String description;
+  final String body;
+  final List<String> tagList;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  final bool favorited;
+  final int favoritesCount;
+  final Author author;
 
   Article({
     required this.slug,
